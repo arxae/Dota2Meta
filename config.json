@@ -1,0 +1,30 @@
+{
+	"steamPath": "C:\\Program Files (x86)\\Steam",
+	"accountId": "",
+	"gridConfig": [
+		{
+			"name": "$bracket$ ($version$) ($shortdate$)",
+			"brackets": [
+				"Herald",
+				"Divine",
+				"Immortal"
+			],
+			"height": 500,
+			"width": 200,
+			"topWins": 5,
+			"positions": [
+				"POSITION_1",
+				"POSITION_2",
+				"POSITION_3",
+				"POSITION_4",
+				"POSITION_5"
+			],
+			"custom": [
+				{
+					"name": "Picks",
+					"heroes": []
+				}
+			]
+		}
+	]
+}

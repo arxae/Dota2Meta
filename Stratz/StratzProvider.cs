@@ -17,23 +17,25 @@ namespace Dota2Meta.Stratz
 			client = gqlClient;
 		}
 
-		public async Task<List<HeroWinType>> GetWinWeekForPosition(MatchPlayerPositionType position, RankBracket bracket)
+		public async Task<List<HeroWinType>> GetWinWeekForPosition(MatchPlayerPositionType position, RankBracket bracket, GameModeEnumType gameMode)
 		{
 			var req = new GraphQLRequest
 			{
 				Query = @"
-				query getWinWeekForPosition($pos: [MatchPlayerPositionType], $bracket: [RankBracket]) {
+				query getWinWeekForPosition($pos: [MatchPlayerPositionType], $bracket: [RankBracket], $gameMode: [GameModeEnumType]) {
 					heroStats {
-						winWeek(take: 1, positionIds: $pos, bracketIds: $bracket) {
-							heroId,
+						winWeek(take: 1, positionIds: $pos, bracketIds: $bracket, gameModeIds: $gameMode) {
+							heroId
 							winCount
+							matchCount
 						}
 					}
 				}",
 				Variables = new
 				{
 					pos = new MatchPlayerPositionType[] { position },
-					bracket = new RankBracket[] { bracket }
+					bracket = new RankBracket[] { bracket },
+					gameMode = new GameModeEnumType[] { gameMode }
 				}
 			};
 
@@ -114,6 +116,51 @@ namespace Dota2Meta.Stratz
 			}
 
 			return hero;
+		}
+
+		public async Task<HeroType> GetHeroById(byte id)
+		{
+			if(_allHeroes == null) await GetAllHeroes();
+
+			var hero = _allHeroes.FirstOrDefault(h => h.id == id);
+
+			if(hero == null)
+			{
+				throw new System.ArgumentException($"Unable to find hero with id '{id}'");
+			}
+
+			return hero;
+		}
+
+		public async Task<IEnumerable<HeroPositionDetailType>> GetPositionDetails(byte heroId)
+		{
+			var req = new GraphQLRequest
+			{
+				Query = @"
+				query getHeroPositionStats($heroId: Short!) {
+					heroStats {
+						position(heroId: $heroId) {
+							position
+							count
+							wins
+							kills
+							deaths
+							assists
+							cs
+							dn
+							heroDamage
+							towerDamage
+						}
+					}
+				}",
+				Variables = new {
+					heroId = heroId
+				}
+			};
+
+			var res = await client.SendQueryAsync<StratzResponseType>(req);
+
+			return res.Data.heroStats.position.ToList();
 		}
 	}
 }

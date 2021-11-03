@@ -13,6 +13,8 @@
 		public HeroLanguageType language { get; set; }
 		public HeroTalentType[] talents { get; set; }
 		public HeroStatType stats { get; set; }
+
+		public override string ToString() => $"{id}: {displayName}";
 	}
 
 	public record HeroAbilityType
@@ -140,5 +142,19 @@
 		public float visionDaytimeRange { get; set; }
 		public float visionNighttimeRange { get; set; }
 		public byte complexity { get; set; }
+	}
+
+	public record HeroPositionDetailType
+	{
+		public MatchPlayerPositionType position { get; set; }
+		public int count { get; set; }
+		public double wins { get; set; }
+		public double kills { get; set; }
+		public double deaths { get; set; }
+		public double assists { get; set; }
+		public double cs { get; set; }
+		public double dn { get; set; }
+		public double heroDamage { get; set; }
+		public double towerDamage { get; set; }
 	}
 }

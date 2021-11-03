@@ -19,7 +19,7 @@ namespace Dota2Meta.Stratz.Types
 		YES,
 		YES_STRONG
 	}
-	
+
 	public enum RankBracket
 	{
 		UNCALIBRATED,
@@ -31,5 +31,34 @@ namespace Dota2Meta.Stratz.Types
 		ANCIENT,
 		DIVINE,
 		IMMORTAL
+	}
+
+	public enum GameModeEnumType
+	{
+		NONE,
+		ALL_PICK,
+		CAPTAINS_MODE,
+		RANDOM_DRAFT,
+		SINGLE_DRAFT,
+		ALL_RANDOM,
+		INTRO,
+		THE_DIRETIDE,
+		REVERSE_CAPTAINS_MODE,
+		THE_GREEVILING,
+		TUTORIAL,
+		MID_ONLY,
+		LEAST_PLAYED,
+		NEW_PLAYER_POOL,
+		COMPENDIUM_MATCHMAKING,
+		CUSTOM,
+		CAPTAINS_DRAFT,
+		BALANCED_DRAFT,
+		ABILITY_DRAFT,
+		EVENT,
+		ALL_RANDOM_DEATH_MATCH,
+		SOLO_MID,
+		ALL_PICK_RANKED,
+		TURBO,
+		MUTATION
 	}
 }

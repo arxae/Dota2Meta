@@ -5,6 +5,7 @@ namespace Dota2Meta.Stratz.Types
 		public HeroWinType[] winDay { get; set; }
 		public HeroWinType[] winWeek { get; set; }
 		public HeroWinType[] winMonth { get; set; }
+		public HeroPositionDetailType[] position { get; set; }
 	}
 
 	public record HeroWinType
@@ -15,5 +16,7 @@ namespace Dota2Meta.Stratz.Types
 		public byte heroId { get; set; }
 		public int winCount { get; set; }
 		public int matchCount { get; set; }
+
+		public float WinRate => (float)winCount / (float)matchCount;
 	}
 }

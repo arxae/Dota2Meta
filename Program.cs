@@ -74,8 +74,9 @@
 						c.width = grid.width;
 						c.height = grid.height;
 
-						var wins = (await stratz.GetWinWeekForPosition(pos, currBracket))
-									.OrderByDescending(w => w.winCount)
+						var wins = (await stratz.GetWinWeekForPosition(pos, currBracket, GameModeEnumType.ALL_PICK_RANKED))
+									.Where(w => w.matchCount > 100)
+									.OrderByDescending(w => w.WinRate)
 									.Take(grid.topWins);
 						c.hero_ids.AddRange(wins.Select(c => (int)c.heroId));
 						pickConfig.categories.Add(c);
